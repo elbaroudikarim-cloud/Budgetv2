@@ -11,7 +11,7 @@ const fontFaces = `
 @font-face{font-family:Mont;src:url(${staticFile('Montserrat.ttf')});font-weight:100 900;}
 `;
 const serif = {fontFamily: 'Cardo'}, serifI = {fontFamily: 'CardoI'}, sans = {fontFamily: 'Mont', fontWeight: 500};
-const shadow = '0 2px 18px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.6)';
+const shadow = '0 2px 16px rgba(0,0,0,.6), 0 1px 3px rgba(0,0,0,.7)';
 
 const D = (f, a, b, c, d, e = Easing.inOut(Easing.cubic)) => interpolate(f, [a, b], [c, d], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: e});
 
@@ -23,8 +23,8 @@ const Photo = ({src, dur, z0 = 1.08, z1 = 1.22, x0 = 0, x1 = -6, y0 = 0, y1 = 0}
   return (
     <AbsoluteFill style={{overflow: 'hidden', background: INK}}>
       <Img src={staticFile(src)} style={{position: 'absolute', height: '100%', left: '50%', top: 0,
-        transform: `translateX(-50%) translate(${x}%, ${y}%) scale(${z})`, filter: 'contrast(1.04) saturate(0.95)'}} />
-      <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 34%, rgba(0,0,0,.5) 48%, rgba(0,0,0,.68) 66%, rgba(0,0,0,.72) 100%)'}} />
+        transform: `translateX(-50%) translate(${x}%, ${y}%) scale(${z})`, filter: 'brightness(1.07) contrast(1.04) saturate(1.0)'}} />
+      <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(0,0,0,.28) 0%, rgba(0,0,0,0) 15%, rgba(0,0,0,0) 50%, rgba(0,0,0,.38) 60%, rgba(0,0,0,.45) 70%, rgba(0,0,0,.25) 84%, rgba(0,0,0,.12) 100%)'}} />
     </AbsoluteFill>
   );
 };
@@ -45,7 +45,7 @@ const Pop = ({delay = 0, children, style}) => {
 
 const DataBar = ({text}) => {
   const f = useCurrentFrame();
-  return <div style={{position: 'absolute', top: 210, left: ML, width: SAFE_W, textAlign: 'center', ...sans, fontSize: 31, letterSpacing: 7,
+  return <div style={{position: 'absolute', top: 210, left: ML, width: SAFE_W, textAlign: 'center', ...sans, fontWeight: 600, fontSize: 31, letterSpacing: 7,
     color: IVORY, textShadow: shadow, opacity: D(f, 4, 18, 0, 1)}}>{text}</div>;
 };
 
@@ -54,7 +54,7 @@ const RoomTag = ({num, room, detail, delay = 10}) => {
   const f = useCurrentFrame();
   const w = D(f, delay, delay + 14, 0, 70, Easing.out(Easing.cubic));
   return (
-    <div style={{position: 'absolute', left: ML, top: 1035, width: MR - ML - 40}}>
+    <div style={{position: 'absolute', left: ML, top: 1110, width: MR - ML - 40}}>
       <div style={{height: 3, width: w, background: GOLD, marginBottom: 26}} />
       <Pop delay={delay + 6}>
         <div style={{...serifI, fontSize: 92, color: IVORY, textShadow: shadow, lineHeight: 1}}>
@@ -62,7 +62,7 @@ const RoomTag = ({num, room, detail, delay = 10}) => {
         </div>
       </Pop>
       <Pop delay={delay + 14}>
-        <div style={{...sans, fontSize: 31, letterSpacing: 4.5, color: IVORY, marginTop: 22, textShadow: shadow, lineHeight: 1.45}}>{detail}</div>
+        <div style={{...sans, fontWeight: 600, fontSize: 31, letterSpacing: 4.5, color: IVORY, marginTop: 22, textShadow: shadow + ', 0 0 24px rgba(0,0,0,.5)', lineHeight: 1.45}}>{detail}</div>
       </Pop>
     </div>
   );
@@ -76,7 +76,7 @@ const Counter = ({to, suffix, label, delay}) => {
     <Pop delay={delay}>
       <div style={{textAlign: 'center', minWidth: 300}}>
         <div style={{...serif, fontSize: 132, color: IVORY, textShadow: shadow, lineHeight: 1}}>{v}<span style={{fontSize: 70}}>{suffix}</span></div>
-        <div style={{...sans, fontSize: 28, letterSpacing: 7, color: GOLD, marginTop: 10, textShadow: shadow}}>{label}</div>
+        <div style={{...sans, fontWeight: 600, fontSize: 28, letterSpacing: 7, color: IVORY, marginTop: 10, textShadow: shadow}}>{label}</div>
       </div>
     </Pop>
   );
@@ -114,12 +114,12 @@ const Intro = () => {
 const Title = () => (
   <AbsoluteFill>
     <Photo src="p9.jpg" dur={150} z0={1.12} z1={1.0} />
-    <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(0,0,0,0) 26%, rgba(0,0,0,.5) 36%, rgba(0,0,0,.5) 62%, rgba(0,0,0,0) 72%)'}} />
+    <AbsoluteFill style={{background: 'linear-gradient(180deg, rgba(0,0,0,0) 28%, rgba(0,0,0,.32) 37%, rgba(0,0,0,.32) 60%, rgba(0,0,0,0) 70%)'}} />
     <div style={{position: 'absolute', top: 640, left: ML, width: SAFE_W, textAlign: 'center'}}>
-      <Pop delay={4}><div style={{...sans, fontSize: 30, letterSpacing: 11, color: IVORY, textShadow: shadow}}>IMMO MAROC</div></Pop>
+      <Pop delay={4}><div style={{...sans, fontWeight: 600, fontSize: 30, letterSpacing: 11, color: IVORY, textShadow: shadow + ', 0 0 24px rgba(0,0,0,.5)'}}>IMMO MAROC</div></Pop>
       <Pop delay={10}><div style={{...serif, fontSize: 138, color: IVORY, textShadow: shadow, marginTop: 22, lineHeight: 1}}>Riad Zitoun</div></Pop>
       <Pop delay={18}><div style={{...serifI, fontSize: 62, color: IVORY, textShadow: shadow, marginTop: 14}}>Médina de Marrakech</div></Pop>
-      <Pop delay={26}><div style={{...sans, fontSize: 30, letterSpacing: 12, color: GOLD, textShadow: shadow, marginTop: 30}}>À VENDRE</div></Pop>
+      <Pop delay={26}><div style={{...sans, fontWeight: 600, fontSize: 30, letterSpacing: 12, color: IVORY, textShadow: shadow + ', 0 0 24px rgba(0,0,0,.5)', marginTop: 30}}>À VENDRE</div></Pop>
     </div>
   </AbsoluteFill>
 );
@@ -128,7 +128,7 @@ const Figures = () => (
   <AbsoluteFill>
     <Photo src="p1.jpg" dur={170} z0={1.05} z1={1.2} x0={4} x1={-4} />
     <DataBar text="RIAD ZITOUN  ·  194 M²  ·  4 SUITES" />
-    <div style={{position: 'absolute', top: 520, left: ML, width: SAFE_W, display: 'flex', justifyContent: 'space-around', padding: '34px 0', background: 'rgba(14,13,12,.58)', backdropFilter: 'blur(14px)', borderTop: `1.5px solid ${GOLD}`, borderBottom: `1.5px solid ${GOLD}`}}>
+    <div style={{position: 'absolute', top: 520, left: ML, width: SAFE_W, display: 'flex', justifyContent: 'space-around', padding: '34px 0', background: 'rgba(14,13,12,.42)', backdropFilter: 'blur(14px)', borderTop: `1.5px solid ${GOLD}`, borderBottom: `1.5px solid ${GOLD}`}}>
       <Counter to={194} suffix=" m²" label="AU SOL" delay={10} />
       <Counter to={4} suffix="" label="SUITES" delay={22} />
     </div>
